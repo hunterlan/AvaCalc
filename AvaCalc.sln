@@ -1,8 +1,22 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AvaCalc.UI", "src\AvaCalc.UI\AvaCalc.UI.csproj", "{66F38D31-0DDB-448A-9E3E-499C9EFBEB0D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AvaCalc.Core", "src\AvaCalc.Core\AvaCalc.Core.csproj", "{BD584DCE-D184-4091-838B-B0654E34FF36}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{66F38D31-0DDB-448A-9E3E-499C9EFBEB0D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66F38D31-0DDB-448A-9E3E-499C9EFBEB0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66F38D31-0DDB-448A-9E3E-499C9EFBEB0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66F38D31-0DDB-448A-9E3E-499C9EFBEB0D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD584DCE-D184-4091-838B-B0654E34FF36}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD584DCE-D184-4091-838B-B0654E34FF36}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD584DCE-D184-4091-838B-B0654E34FF36}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD584DCE-D184-4091-838B-B0654E34FF36}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
