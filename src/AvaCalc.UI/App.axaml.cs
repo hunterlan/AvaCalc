@@ -40,10 +40,14 @@ public partial class App : Application
     {
         var services = new ServiceCollection();
 
-        // Mode ViewModel map — populated as modes are implemented
+        // Mode ViewModel map — add new modes here as they are implemented
         // Key: CalculatorMode enum value, Value: concrete ViewModel type
-        var modeViewModelTypes = new Dictionary<CalculatorMode, Type>();
+        var modeViewModelTypes = new Dictionary<CalculatorMode, Type>
+        {
+            [CalculatorMode.Simple] = typeof(SimpleCalculatorViewModel)
+        };
 
+        services.AddSingleton<SimpleCalculatorViewModel>();
         services.AddSingleton<ICalculatorModeViewModelFactory>(sp =>
             new CalculatorModeViewModelFactory(sp, modeViewModelTypes));
         services.AddSingleton<IModeNavigationService>(sp =>
