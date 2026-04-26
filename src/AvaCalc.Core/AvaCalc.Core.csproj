@@ -6,4 +6,9 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <Folder Include="Expressions\" />
+      <Folder Include="Modes\" />
+    </ItemGroup>
+
 </Project>
