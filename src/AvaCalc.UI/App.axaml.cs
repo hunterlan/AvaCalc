@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
+using AvaCalc.Core.Modes;
 using AvaCalc.Core.Shared;
 using AvaCalc.UI.Factories;
 using AvaCalc.UI.Services;
@@ -47,6 +48,7 @@ public partial class App : Application
             [CalculatorMode.Simple] = typeof(SimpleCalculatorViewModel)
         };
 
+        services.AddSingleton<ICalculatorMode, SimpleCalculatorMode>();
         services.AddSingleton<SimpleCalculatorViewModel>();
         services.AddSingleton<ICalculatorModeViewModelFactory>(sp =>
             new CalculatorModeViewModelFactory(sp, modeViewModelTypes));

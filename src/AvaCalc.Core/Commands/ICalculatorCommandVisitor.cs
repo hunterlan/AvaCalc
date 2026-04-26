@@ -38,4 +38,7 @@ public interface ICalculatorCommandVisitor
 
     /// <summary>Handles a <see cref="PercentCommand"/>.</summary>
     void Visit(PercentCommand command);
+
+    /// <summary>Handles a <see cref="SquareRootCommand"/>.</summary>
+    void Visit(SquareRootCommand command);
 }

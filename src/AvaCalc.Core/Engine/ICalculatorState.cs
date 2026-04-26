@@ -52,6 +52,10 @@ public interface ICalculatorState
     /// <param name="context">The shared calculator context.</param>
     void HandlePercent(CalculatorContext context);
 
+    /// <summary>Handles the √ (square root) key press.</summary>
+    /// <param name="context">The shared calculator context.</param>
+    void HandleSquareRoot(CalculatorContext context);
+
     /// <summary>
     /// Returns the string to show on the calculator display for the current state.
     /// </summary>

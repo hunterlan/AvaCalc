@@ -42,5 +42,8 @@ public abstract class CalculatorStateBase : ICalculatorState
     public virtual void HandlePercent(CalculatorContext context) { }
 
     /// <inheritdoc/>
+    public virtual void HandleSquareRoot(CalculatorContext context) { }
+
+    /// <inheritdoc/>
     public abstract string GetDisplayValue(CalculatorContext context);
 }

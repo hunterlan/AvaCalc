@@ -87,4 +87,7 @@ public sealed class CalculatorContext
 
     /// <summary>Forwards a percent input to the current state.</summary>
     public void HandlePercent() => _currentState.HandlePercent(this);
+
+    /// <summary>Forwards a square-root input to the current state.</summary>
+    public void HandleSquareRoot() => _currentState.HandleSquareRoot(this);
 }
