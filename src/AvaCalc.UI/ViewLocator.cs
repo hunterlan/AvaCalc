@@ -1,37 +1,39 @@
 using System;
-using System.Diagnostics.CodeAnalysis;
+using System.Collections.Generic;
 using Avalonia.Controls;
 using Avalonia.Controls.Templates;
 using AvaCalc.UI.ViewModels;
+using AvaCalc.UI.Views;
 
 namespace AvaCalc.UI;
 
 /// <summary>
-/// Given a view model, returns the corresponding view if possible.
+/// Given a view model, returns the corresponding view.
+/// Uses an explicit compile-time mapping to remain Native AOT and trim-safe —
+/// no reflection, no <c>Type.GetType</c>, no <c>Activator.CreateInstance</c>.
+/// Add a new entry to <see cref="_viewMap"/> for every new ViewModel/View pair.
 /// </summary>
-[RequiresUnreferencedCode(
-    "Default implementation of ViewLocator involves reflection which may be trimmed away.",
-    Url = "https://docs.avaloniaui.net/docs/concepts/view-locator")]
-public class ViewLocator : IDataTemplate
+public sealed class ViewLocator : IDataTemplate
 {
+    // Keyed by the concrete ViewModel type; value is a factory that creates the matching View.
+    // Every entry is resolved at compile time, making this fully AOT-compatible.
+    private static readonly Dictionary<Type, Func<Control>> _viewMap = new()
+    {
+        [typeof(SimpleCalculatorViewModel)] = () => new SimpleCalculatorView()
+    };
+
+    /// <inheritdoc/>
     public Control? Build(object? param)
     {
         if (param is null)
             return null;
 
-        var name = param.GetType().FullName!.Replace("ViewModel", "View", StringComparison.Ordinal);
-        var type = Type.GetType(name);
+        if (_viewMap.TryGetValue(param.GetType(), out var factory))
+            return factory();
 
-        if (type != null)
-        {
-            return (Control)Activator.CreateInstance(type)!;
-        }
-
-        return new TextBlock { Text = "Not Found: " + name };
+        return new TextBlock { Text = $"Not Found: {param.GetType().FullName}" };
     }
 
-    public bool Match(object? data)
-    {
-        return data is ViewModelBase;
-    }
+    /// <inheritdoc/>
+    public bool Match(object? data) => data is ViewModelBase;
 }

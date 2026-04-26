@@ -49,9 +49,21 @@ public partial class App : Application
         };
 
         services.AddSingleton<ICalculatorMode, SimpleCalculatorMode>();
+        services.AddSingleton<ICalculatorMode, SimpleCalculatorMode>();
         services.AddSingleton<SimpleCalculatorViewModel>();
+
+        // Mode ViewModel map — add new modes here as they are implemented.
+        // Each entry is a typed delegate so the factory remains Native AOT and trim-safe.
         services.AddSingleton<ICalculatorModeViewModelFactory>(sp =>
-            new CalculatorModeViewModelFactory(sp, modeViewModelTypes));
+        {
+            var modeFactories = new Dictionary<CalculatorMode, Func<ViewModelBase>>
+            {
+                [CalculatorMode.Simple] = () => sp.GetRequiredService<SimpleCalculatorViewModel>()
+            };
+
+            return new CalculatorModeViewModelFactory(modeFactories);
+        });
+
         services.AddSingleton<IModeNavigationService>(sp =>
             new ModeNavigationService(
                 sp.GetRequiredService<ICalculatorModeViewModelFactory>(),
